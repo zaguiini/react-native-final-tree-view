@@ -1,4 +1,4 @@
-# react-native-tree-view
+# react-native-final-tree-view
 A React Native Tree View component!
 
 ## Installation
@@ -45,7 +45,7 @@ After defining your data, mount the component:
 import React from 'react'
 import { Text, View } from 'react-native'
 
-import TreeView from '@zaguini/react-native-tree-view'
+import TreeView from 'react-native-final-tree-view'
 
 class App extends React.PureComponent {
   state = {
