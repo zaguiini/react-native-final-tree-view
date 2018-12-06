@@ -2,9 +2,9 @@
 A React Native Tree View component!
 
 ## Installation
-`yarn add @zaguini/react-native-tree-view`
+`yarn add react-native-final-tree-view`
 or
-`npm install @zaguini/react-native-tree-view --save`
+`npm install react-native-final-tree-view --save`
 
 ## Usage
 Firstly, you have to define your data. Example:
