@@ -126,7 +126,7 @@ class TreeView extends React.PureComponent {
     return this.removeCollapsedKey(this.state.data.slice())
   }
 
-  handleNodePressed(children) {
+  handleNodePressed(children, level) {
     const newData = this.toggleCollapse(
       this.state.data.slice(),
       children[this.props.idKey]
@@ -136,7 +136,7 @@ class TreeView extends React.PureComponent {
       data: newData,
     })
 
-    this.props.onItemPress && this.props.onItemPress(children)
+    this.props.onItemPress && this.props.onItemPress(children, level)
   }
 
   handleDeleteNode(id) {
@@ -164,7 +164,7 @@ class TreeView extends React.PureComponent {
           }}
         >
           <TouchableOpacity
-            onPress={() => this.handleNodePressed(children)}
+            onPress={() => this.handleNodePressed(children, level)}
             onLongPress={() => {
               if(this.props.onItemLongPress) {
                 this.props.onItemLongPress(children)
