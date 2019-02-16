@@ -205,6 +205,11 @@ Gets the raw, updated, tree data.
 
 Yes, it does. Feel free to modify that awesome state and see the modifications :)
 
----
+## TODO
 
-License: MIT
+- Typescript/Flow typings
+- Refactor to functional components
+
+## License
+
+MIT
