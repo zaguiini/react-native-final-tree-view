@@ -167,10 +167,8 @@ class TreeView extends React.PureComponent {
             onPress={() => this.handleNodePressed(children, level)}
             onLongPress={() => {
               if(this.props.onItemLongPress) {
-                this.props.onItemLongPress(children)
-              }
-
-              if(this.props.deleteOnLongPress) {
+                this.props.onItemLongPress(children, level)
+              } else if(this.props.deleteOnLongPress) {
                 this.handleDeleteNode(children[this.props.idKey])
               }
             }}

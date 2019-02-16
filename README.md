@@ -1,13 +1,17 @@
 # react-native-final-tree-view
+
 A React Native Tree View component!
 
 ## Installation
+
 `yarn add react-native-final-tree-view`
 or
 `npm install react-native-final-tree-view --save`
 
 ## Usage
+
 Firstly, you have to define your data. Example:
+
 ```js
 const family = [
   {
@@ -41,6 +45,7 @@ It is required that each node on the tree have its own `id` key. Obviously, it s
 The tree nodes are defined in the `children` key. They are an array of objects, following the same structure as the parent.
 
 After defining your data, mount the component:
+
 ```js
 import React from 'react'
 import { Text, View } from 'react-native'
@@ -84,7 +89,7 @@ class App extends React.PureComponent {
   render() {
     return (
       <TreeView
-        ref={ref => this.treeView = ref}
+        ref={ref => (this.treeView = ref)}
         data={this.state.data}
         deleteOnLongPress
         renderItem={(item, level) => (
@@ -94,11 +99,11 @@ class App extends React.PureComponent {
                 marginLeft: 25 * level,
               }}
             >
-              {
-                item.collapsed !== null ?
-                <Text>{item.collapsed ? ' > ' : ' \\/ '}</Text> :
+              {item.collapsed !== null ? (
+                <Text>{item.collapsed ? ' > ' : ' \\/ '}</Text>
+              ) : (
                 <Text> - </Text>
-              }
+              )}
               {item.name}
             </Text>
           </View>
@@ -122,30 +127,47 @@ And, after a few touches:
 ## Props
 
 ### `data`
+
 Required. The tree data to render;
 
 ### `collapsedItemHeight`
+
 Optional. The collapsed item height. Defaults to `20`;
 
 ### `idKey`
+
 Optional. The `id` key to refer to. Defaults to `id`;
 
 ### `childrenKey`
+
 Optional. The `children` key to look for. Defaults to `children`;
 
 ### `onItemPress`
-Optional. A callback fired when a node is pressed. The pressed node is sent as the only argument;
+
+Optional. A callback fired when a node is pressed. Signature:
+
+```js
+onItemPress(node, level) /* the level inside the tree */
+```
 
 ### `onItemLongPress`
-Optional. A callback fired when a node is long pressed. The pressed node is sent as the only argument;
+
+Optional. A callback fired when a node is long pressed. Signature:
+
+```js
+onItemLongPress(node, level) /* the level inside the tree */
+```
 
 ### `deleteOnLongPress`
-Optional. Deletes the pressed node when long pressed;
+
+Optional. Deletes the pressed node when long pressed. Cannot be used if `onItemLongPress` is defined;
 
 ### `renderItem`
+
 **Required**. A function that must return the JSX to render the item. The arguments passed are the `child` and
 the current `level` in the tree, starting from `0`.
 You get, for free, a `collapsed` key, which could have the possible values:
+
 - `null` when there are no children for this node;
 - `true` when the node is collapsed;
 - `false` when the node is expanded.
@@ -174,6 +196,7 @@ renderItem={(item, level) => (
 ## Methods
 
 ### `getRawData`
+
 Gets the raw, updated, tree data.
 
 ## FAQ
@@ -182,6 +205,6 @@ Gets the raw, updated, tree data.
 
 Yes, it does. Feel free to modify that awesome state and see the modifications :)
 
-------
+---
 
 License: MIT
