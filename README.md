@@ -134,6 +134,14 @@ Required. The tree data to render;
 
 Optional. The collapsed item height. Defaults to `20`;
 
+### `collapsedItemHeightForLevel`
+
+Optional. The collapsed item height for level. Signature:
+
+```js
+collapsedItemHeightForLevel(level) /* the level inside the tree */
+```
+
 ### `idKey`
 
 Optional. The `id` key to refer to. Defaults to `id`;

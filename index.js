@@ -151,13 +151,22 @@ class TreeView extends React.PureComponent {
     return data.map(children => {
       const hasChildren = children[this.props.childrenKey] &&
         children[this.props.childrenKey].length > 0
-
+      var height = undefined
+      if (children.collapsed) {
+        if (this.props.collapsedItemHeightForLevel !== undefined) {
+          height = this.props.collapsedItemHeightForLevel(level)
+        } else {
+          height = this.props.collapsedItemHeight
+        }
+      } else {
+        height = 'auto'
+      }
       return (
         <View
           key={children[this.props.idKey]}
           style={{
             height: (
-              children.collapsed ? this.props.collapsedItemHeight : 'auto'
+              height
             ),
             zIndex: 1,
             overflow: 'hidden',
