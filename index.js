@@ -10,7 +10,7 @@ class TreeView extends React.PureComponent {
   static propTypes = {
     data: types.array.isRequired,
     renderItem: types.func.isRequired,
-    collapsedItemHeight: types.number,
+    collapsedItemHeightForLevel: types.func,
     idKey: types.string,
     childrenKey: types.string,
     onItemPress: types.func,
@@ -19,7 +19,9 @@ class TreeView extends React.PureComponent {
   }
 
   static defaultProps = {
-    collapsedItemHeight: 20,
+    collapsedItemHeightForLevel: (level) => {
+      return 20
+    },
     deleteOnLongPress: false,
     idKey: 'id',
     childrenKey: 'children',
@@ -151,13 +153,12 @@ class TreeView extends React.PureComponent {
     return data.map(children => {
       const hasChildren = children[this.props.childrenKey] &&
         children[this.props.childrenKey].length > 0
-
       return (
         <View
           key={children[this.props.idKey]}
           style={{
             height: (
-              children.collapsed ? this.props.collapsedItemHeight : 'auto'
+              children.collapsed ? this.props.collapsedItemHeightForLevel(level) : 'auto'
             ),
             zIndex: 1,
             overflow: 'hidden',
