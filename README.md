@@ -130,13 +130,9 @@ And, after a few touches:
 
 Required. The tree data to render;
 
-### `collapsedItemHeight`
-
-Optional. The collapsed item height. Defaults to `20`;
-
 ### `collapsedItemHeightForLevel`
 
-Optional. The collapsed item height for level. Signature:
+Optional. The collapsed item height for level. Defaults to `20`. Signature:
 
 ```js
 collapsedItemHeightForLevel(level) /* the level inside the tree */
