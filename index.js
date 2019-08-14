@@ -177,7 +177,7 @@ class TreeView extends React.PureComponent {
             {this.props.renderItem(children, level)}
           </TouchableOpacity>
           {
-            hasChildren &&
+            hasChildren && !children.collapsed &&
             this.renderTree(children[this.props.childrenKey], level + 1)
           }
         </View>
