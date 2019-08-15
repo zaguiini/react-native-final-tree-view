@@ -171,7 +171,7 @@ Optional. The `id` key to refer to. Defaults to `id`
 
 Optional. The `children` key to look for. Defaults to `children`
 
-### initialExpanded
+### `initialExpanded`
 
 If nodes should start expanded. Defaults to `false`
 
@@ -180,6 +180,10 @@ If nodes should start expanded. Defaults to `false`
 ### If I modify the `data` prop does it reflect the changes without collapsing the nodes?
 
 No. Once you modify the data, the whole tree goes back to `initialExpanded`
+
+### Are PRs open?
+
+Yes! Feel free to contribute!
 
 ## License
 
