@@ -5,8 +5,6 @@ A React Native Tree View component!
 ## Installation
 
 `yarn add react-native-final-tree-view`
-or
-`npm install react-native-final-tree-view --save`
 
 ## Usage
 
@@ -42,7 +40,8 @@ const family = [
 ```
 
 It is required that each node on the tree have its own `id` key. Obviously, it should be **unique**.
-The tree nodes are defined in the `children` key. They are an array of objects, following the same structure as the parent.
+The tree nodes are defined in the `children` key.
+They are an array of objects, following the same structure as the parent.
 
 After defining your data, mount the component. Example:
 
@@ -98,43 +97,7 @@ And, after a few touches:
 
 ### `data`
 
-Required. The tree data to render;
-
-### `getCollapsedNodeHeight`
-
-Optional. The collapsed item height for level. Defaults to `20`. Signature:
-
-```js
-getCollapsedNodeHeight({ [idKey], level })
-```
-
-The `[idKey]` part is whatever you chose to be the id. Defaults to `id`
-
-### `idKey`
-
-Optional. The `id` key to refer to. Defaults to `id`;
-
-### `childrenKey`
-
-Optional. The `children` key to look for. Defaults to `children`;
-
-### `onNodePress`
-
-Optional. A callback fired when a node is pressed. Signature:
-
-```js
-onNodePress({ node, level })
-```
-
-It accepts a promise if you want. If you **DON'T** want the specific node to expand or collapse, return `false` at the end of this event!!!
-
-### `onNodeLongPress`
-
-Optional. A callback fired when a node is long pressed. Signature:
-
-```js
-onNodeLongPress({ node, level })
-```
+**Required**. The tree data to render
 
 ### `renderNode`
 
@@ -169,6 +132,42 @@ renderNode={({ node, level, isExpanded, hasChildrenNodes }) => (
   </View>
 )}
 ```
+
+### `onNodePress`
+
+Optional. A callback fired when a node is pressed. Signature:
+
+```js
+onNodePress({ node, level })
+```
+
+It accepts a promise if you want. If you **DON'T** want the specific node to expand or collapse, return `false` at the end of this event!!!
+
+### `getCollapsedNodeHeight`
+
+Optional. The collapsed item height for level. Defaults to `20`. Signature:
+
+```js
+getCollapsedNodeHeight({ [idKey], level })
+```
+
+### `onNodeLongPress`
+
+Optional. A callback fired when a node is long pressed. Signature:
+
+```js
+onNodeLongPress({ node, level })
+```
+
+The `[idKey]` part is whatever you chose to be the id. Defaults to `id`
+
+### `idKey`
+
+Optional. The `id` key to refer to. Defaults to `id`
+
+### `childrenKey`
+
+Optional. The `children` key to look for. Defaults to `children`
 
 ### initialExpanded
 
