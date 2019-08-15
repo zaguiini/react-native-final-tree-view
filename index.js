@@ -9,6 +9,7 @@ class TreeView extends React.Component {
   static propTypes = {
     data: PropTypes.array.isRequired,
     renderNode: PropTypes.func.isRequired,
+    initialExpanded: PropTypes.bool,
     getCollapsedNodeHeight: PropTypes.func,
     idKey: PropTypes.string,
     childrenKey: PropTypes.string,
@@ -51,15 +52,15 @@ class TreeView extends React.Component {
   isExpanded = (id) =>
     get(this.state.expandedNodeKeys, id, this.props.initialExpanded)
 
-  expandNodeKeyById = (id, expanded) => ({ expandedNodeKeys }) => ({
+  updateNodeKeyById = (id, expanded) => ({ expandedNodeKeys }) => ({
     expandedNodeKeys: Object.assign({}, expandedNodeKeys, {
       [id]: expanded,
     }),
   })
 
-  collapseNode = (id) => this.setState(this.expandNodeKeyById(id, false))
+  collapseNode = (id) => this.setState(this.updateNodeKeyById(id, false))
 
-  expandNode = (id) => this.setState(this.expandNodeKeyById(id, true))
+  expandNode = (id) => this.setState(this.updateNodeKeyById(id, true))
 
   toggleCollapse = (id) => {
     const method = this.isExpanded(id) ? 'collapseNode' : 'expandNode'

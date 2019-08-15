@@ -44,7 +44,7 @@ const family = [
 It is required that each node on the tree have its own `id` key. Obviously, it should be **unique**.
 The tree nodes are defined in the `children` key. They are an array of objects, following the same structure as the parent.
 
-After defining your data, mount the component:
+After defining your data, mount the component. Example:
 
 ```js
 import React from 'react'
@@ -52,65 +52,35 @@ import { Text, View } from 'react-native'
 
 import TreeView from 'react-native-final-tree-view'
 
-class App extends React.PureComponent {
-  state = {
-    data: [
-      {
-        id: 'Grandparent',
-        name: 'Grandpa',
-        age: 78,
-        children: [
-          {
-            id: 'Me',
-            name: 'Me',
-            age: 30,
-            children: [
-              {
-                id: 'Erick',
-                name: 'Erick',
-                age: 10,
-              },
-              {
-                id: 'Rose',
-                name: 'Rose',
-                age: 12,
-              },
-            ],
-          },
-        ],
-      },
-    ],
+function getIndicator(isExpanded, hasChildrenNodes) {
+  if (!hasChildrenNodes) {
+    return '-'
+  } else if (isExpanded) {
+    return '\\/'
+  } else {
+    return '>'
   }
+}
 
-  componentDidMount() {
-    console.log(this.treeView.getRawData())
-  }
-
-  render() {
-    return (
-      <TreeView
-        ref={ref => (this.treeView = ref)}
-        data={this.state.data}
-        deleteOnLongPress
-        renderItem={(item, level) => (
+function App() {
+  return (
+    <TreeView
+      data={family} // defined above
+      renderNode={({ node, level, isExpanded, hasChildrenNodes }) => {
+        return (
           <View>
             <Text
               style={{
                 marginLeft: 25 * level,
               }}
             >
-              {item.collapsed !== null ? (
-                <Text>{item.collapsed ? ' > ' : ' \\/ '}</Text>
-              ) : (
-                <Text> - </Text>
-              )}
-              {item.name}
+              {getIndicator(isExpanded, hasChildrenNodes)} {node.name}
             </Text>
           </View>
-        )}
-      />
-    )
-  }
+        )
+      }}
+    />
+  )
 }
 
 export default App
@@ -130,13 +100,15 @@ And, after a few touches:
 
 Required. The tree data to render;
 
-### `collapsedItemHeightForLevel`
+### `getCollapsedNodeHeight`
 
 Optional. The collapsed item height for level. Defaults to `20`. Signature:
 
 ```js
-collapsedItemHeightForLevel(level) /* the level inside the tree */
+getCollapsedNodeHeight({ [idKey], level })
 ```
+
+The `[idKey]` part is whatever you chose to be the id. Defaults to `id`
 
 ### `idKey`
 
@@ -146,73 +118,67 @@ Optional. The `id` key to refer to. Defaults to `id`;
 
 Optional. The `children` key to look for. Defaults to `children`;
 
-### `onItemPress`
+### `onNodePress`
 
 Optional. A callback fired when a node is pressed. Signature:
 
 ```js
-onItemPress(node, level) /* the level inside the tree */
+onNodePress({ node, level })
 ```
 
-### `onItemLongPress`
+It accepts a promise if you want. If you **DON'T** want the specific node to expand or collapse, return `false` at the end of this event!!!
+
+### `onNodeLongPress`
 
 Optional. A callback fired when a node is long pressed. Signature:
 
 ```js
-onItemLongPress(node, level) /* the level inside the tree */
+onNodeLongPress({ node, level })
 ```
 
-### `deleteOnLongPress`
+### `renderNode`
 
-Optional. Deletes the pressed node when long pressed. Cannot be used if `onItemLongPress` is defined;
+**Required**. A function that must return the JSX to render the item. Signature:
 
-### `renderItem`
-
-**Required**. A function that must return the JSX to render the item. The arguments passed are the `child` and
-the current `level` in the tree, starting from `0`.
-You get, for free, a `collapsed` key, which could have the possible values:
-
-- `null` when there are no children for this node;
-- `true` when the node is collapsed;
-- `false` when the node is expanded.
+```js
+renderNode({ node, level, isExpanded, hasChildrenNodes })
+```
 
 Example:
 
 ```js
-renderItem={(item, level) => (
+function getIndicator(isExpanded, hasChildrenNodes) {
+  if (!hasChildrenNodes) {
+    return '-'
+  } else if (isExpanded) {
+    return '\\/'
+  } else {
+    return '>'
+  }
+}
+
+renderNode={({ node, level, isExpanded, hasChildrenNodes }) => (
   <View>
     <Text
       style={{
         marginLeft: 25 * level,
       }}
     >
-      {
-        item.collapsed !== null ?
-        <Text>{item.collapsed ? ' > ' : ' \\/ '}</Text> :
-        <Text> - </Text>
-      }
-      {item.name}
+      {getIndicator(isExpanded, hasChildrenNodes)} {node.name}
     </Text>
   </View>
 )}
 ```
 
-## Methods
+### initialExpanded
 
-### `getRawData`
-
-Gets the raw, updated, tree data.
+If nodes should start expanded. Defaults to `false`
 
 ## FAQ
 
-### If I modify the `data` prop, do the tree reflects the changes?
+### If I modify the `data` prop does it reflect the changes without collapsing the nodes?
 
-Yes, it does. Feel free to modify that awesome state and see the modifications :)
-
-## TODO
-
-- Typescript/Flow typings
-- Refactor to functional components
+No. Once you modify the data, the whole tree goes back to `initialExpanded`
 
 ## License
 

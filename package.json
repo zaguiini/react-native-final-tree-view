@@ -3,6 +3,7 @@
   "description": "A React Native tree view component!",
   "version": "1.2.0",
   "main": "index.js",
+  "typings": "index.d.ts",
   "author": "Luis Felipe Zaguini <luisfelipezaguini@gmail.com> (https://github.com/zaguiini)",
   "license": "MIT",
   "homepage": "https://github.com/zaguiini/react-native-final-tree-view",
