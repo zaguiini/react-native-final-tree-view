@@ -97,7 +97,9 @@ And, after a few touches:
 
 ### `data`
 
-**Required**. The tree data to render
+**Required**. The tree data to render. It's an array of objects.
+Each object should have, at least, the `id` of the node and the `children` of it.
+This structure can be changed via the props `idKey` and `childrenKey`, respectively.
 
 ### `renderNode`
 
@@ -143,20 +145,20 @@ onNodePress({ node, level })
 
 It accepts a promise if you want. If you **DON'T** want the specific node to expand or collapse, return `false` at the end of this event!!!
 
-### `getCollapsedNodeHeight`
-
-Optional. The collapsed item height for level. Defaults to `20`. Signature:
-
-```js
-getCollapsedNodeHeight({ [idKey], level })
-```
-
 ### `onNodeLongPress`
 
 Optional. A callback fired when a node is long pressed. Signature:
 
 ```js
 onNodeLongPress({ node, level })
+```
+
+### `getCollapsedNodeHeight`
+
+Optional. The collapsed item height for level. Defaults to `20`. Signature:
+
+```js
+getCollapsedNodeHeight({ [idKey], level })
 ```
 
 The `[idKey]` part is whatever you chose to be the id. Defaults to `id`
