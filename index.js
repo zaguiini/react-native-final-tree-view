@@ -52,10 +52,10 @@ class TreeView extends React.Component {
     get(node, `${this.props.childrenKey}.length`, 0) > 0
 
   isExpanded = (id) => {
-    if (this.props.isNodeExpanded) {
+    if (this.props.isNodeExpanded !== noop) {
       return this.props.isNodeExpanded(id)
     } else {
-      get(this.state.expandedNodeKeys, id, this.props.initialExpanded)
+        return get(this.state.expandedNodeKeys, id, this.props.initialExpanded)
     }
   }
 
