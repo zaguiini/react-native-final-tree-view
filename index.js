@@ -15,6 +15,7 @@ class TreeView extends React.Component {
     childrenKey: PropTypes.string,
     onNodePress: PropTypes.func,
     onNodeLongPress: PropTypes.func,
+    isNodeExpanded: PropTypes.func
   }
 
   static defaultProps = {
@@ -24,6 +25,7 @@ class TreeView extends React.Component {
     childrenKey: 'children',
     onNodePress: noop,
     onNodeLongPress: noop,
+    isNodeExpanded: noop
   }
 
   constructor(props) {
@@ -49,8 +51,13 @@ class TreeView extends React.Component {
   hasChildrenNodes = (node) =>
     get(node, `${this.props.childrenKey}.length`, 0) > 0
 
-  isExpanded = (id) =>
-    get(this.state.expandedNodeKeys, id, this.props.initialExpanded)
+  isExpanded = (id) => {
+    if (this.props.isNodeExpanded) {
+      return this.props.isNodeExpanded(id)
+    } else {
+      get(this.state.expandedNodeKeys, id, this.props.initialExpanded)
+    }
+  }
 
   updateNodeKeyById = (id, expanded) => ({ expandedNodeKeys }) => ({
     expandedNodeKeys: Object.assign({}, expandedNodeKeys, {

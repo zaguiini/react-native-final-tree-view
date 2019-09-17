@@ -21,6 +21,7 @@ interface Props<DataType> {
     args: NodeAction<DataType>
   ) => void | boolean | Promise<boolean> | Promise<void>
   onNodeLongPress: (args: NodeAction<DataType>) => number
+  isNodeExpanded: (args: DataType) => boolean
 }
 
 export default class TreeView<DataType> extends React.Component<
