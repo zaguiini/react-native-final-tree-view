@@ -153,6 +153,14 @@ Optional. A callback fired when a node is long pressed. Signature:
 onNodeLongPress({ node, level })
 ```
 
+### `isNodeExpanded`
+
+Optional. Used for custom handling of expanded nodes. Signature:
+
+```js
+isNodeExpanded(id)
+```
+
 ### `getCollapsedNodeHeight`
 
 Optional. The collapsed item height for level. Defaults to `20`. Signature:
