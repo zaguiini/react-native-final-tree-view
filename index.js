@@ -15,7 +15,7 @@ class TreeView extends React.Component {
     childrenKey: PropTypes.string,
     onNodePress: PropTypes.func,
     onNodeLongPress: PropTypes.func,
-    isNodeExpanded: PropTypes.func
+    isNodeExpanded: PropTypes.func,
   }
 
   static defaultProps = {
@@ -25,7 +25,7 @@ class TreeView extends React.Component {
     childrenKey: 'children',
     onNodePress: noop,
     onNodeLongPress: noop,
-    isNodeExpanded: noop
+    isNodeExpanded: noop,
   }
 
   constructor(props) {
@@ -55,7 +55,7 @@ class TreeView extends React.Component {
     if (this.props.isNodeExpanded !== noop) {
       return this.props.isNodeExpanded(id)
     } else {
-        return get(this.state.expandedNodeKeys, id, this.props.initialExpanded)
+      return get(this.state.expandedNodeKeys, id, this.props.initialExpanded)
     }
   }
 
@@ -83,7 +83,9 @@ class TreeView extends React.Component {
     }
   }
 
-  Tree = ({ nodes, level }) => {
+  Node = ({ nodes, level }) => {
+    const NodeComponent = this.Node
+
     return nodes.map((node) => {
       const isExpanded = this.isExpanded(node[this.props.idKey])
       const hasChildrenNodes = this.hasChildrenNodes(node)
@@ -115,7 +117,10 @@ class TreeView extends React.Component {
             })}
           </TouchableOpacity>
           {shouldRenderLevel && (
-            <this.Tree nodes={node[this.props.childrenKey]} level={level + 1} />
+            <NodeComponent
+              nodes={node[this.props.childrenKey]}
+              level={level + 1}
+            />
           )}
         </View>
       )
@@ -123,7 +128,7 @@ class TreeView extends React.Component {
   }
 
   render() {
-    return <this.Tree nodes={this.props.data} level={0} />
+    return <this.Node nodes={this.props.data} level={0} />
   }
 }
 
