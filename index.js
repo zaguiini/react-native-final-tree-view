@@ -16,6 +16,7 @@ class TreeView extends React.Component {
     onNodePress: PropTypes.func,
     onNodeLongPress: PropTypes.func,
     isNodeExpanded: PropTypes.func,
+    shouldDisableTouchOnLeaf: PropTypes.func
   }
 
   static defaultProps = {
@@ -26,6 +27,7 @@ class TreeView extends React.Component {
     onNodePress: noop,
     onNodeLongPress: noop,
     isNodeExpanded: noop,
+    shouldDisableTouchOnLeaf: () => false
   }
 
   constructor(props) {
@@ -106,7 +108,10 @@ class TreeView extends React.Component {
           }}
         >
           <TouchableOpacity
-            disabled={ !hasChildrenNodes }
+            disabled={this.props.shouldDisableTouchOnLeaf({
+              [this.props.idKey]: node[this.props.idKey],
+              level,
+            })}
             onPress={() => this.handleNodePressed({ node, level })}
             onLongPress={() => this.props.onNodeLongPress({ node, level })}
           >
