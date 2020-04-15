@@ -108,10 +108,7 @@ class TreeView extends React.Component {
           }}
         >
           <TouchableOpacity
-            disabled={this.props.shouldDisableTouchOnLeaf({
-              [this.props.idKey]: node[this.props.idKey],
-              level,
-            })}
+            disabled={this.props.shouldDisableTouchOnLeaf({ node, level })}
             onPress={() => this.handleNodePressed({ node, level })}
             onLongPress={() => this.props.onNodeLongPress({ node, level })}
           >
