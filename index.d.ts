@@ -14,15 +14,15 @@ interface Props<DataType> {
   data: DataType[]
   renderNode: React.ElementType<RenderNodeProps<DataType>>
   initialExpanded: boolean
-  getCollapsedNodeHeight: (args: NodeAction<DataType>) => number
-  idKey: string
-  childrenKey: string
-  onNodePress: (
+  getCollapsedNodeHeight?: (args: NodeAction<DataType>) => number
+  idKey?: string
+  childrenKey?: string
+  onNodePress?: (
     args: NodeAction<DataType>
   ) => void | boolean | Promise<boolean> | Promise<void>
-  onNodeLongPress: (args: NodeAction<DataType>) => number
-  isNodeExpanded: (args: DataType) => boolean,
-  shouldDisableTouchOnLeaf: (args: NodeAction<DataType>) => boolean
+  onNodeLongPress?: (args: NodeAction<DataType>) => number
+  isNodeExpanded?: (args: DataType) => boolean,
+  shouldDisableTouchOnLeaf?: (args: NodeAction<DataType>) => boolean
 }
 
 export default class TreeView<DataType> extends React.Component<
