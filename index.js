@@ -12,7 +12,7 @@ class TreeView extends React.Component {
     initialExpanded: PropTypes.bool,
     getCollapsedNodeHeight: PropTypes.func,
     idKey: PropTypes.string,
-    activeOpacityNode: ProtoTypes.number,
+    activeOpacityNode: PropTypes.number,
     childrenKey: PropTypes.string,
     onNodePress: PropTypes.func,
     onNodeLongPress: PropTypes.func,
