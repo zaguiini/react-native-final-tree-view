@@ -25,7 +25,7 @@ class TreeView extends React.Component {
     getCollapsedNodeHeight: () => 20,
     idKey: 'id',
     childrenKey: 'children',
-    activeOpacityNode: 1,
+    activeOpacityNode: .1,
     onNodePress: noop,
     onNodeLongPress: noop,
     isNodeExpanded: noop,
