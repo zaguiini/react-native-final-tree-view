@@ -12,6 +12,7 @@ class TreeView extends React.Component {
     initialExpanded: PropTypes.bool,
     getCollapsedNodeHeight: PropTypes.func,
     idKey: PropTypes.string,
+    activeOpacityNode: ProtoTypes.number,
     childrenKey: PropTypes.string,
     onNodePress: PropTypes.func,
     onNodeLongPress: PropTypes.func,
@@ -24,6 +25,7 @@ class TreeView extends React.Component {
     getCollapsedNodeHeight: () => 20,
     idKey: 'id',
     childrenKey: 'children',
+    activeOpacityNode: 1,
     onNodePress: noop,
     onNodeLongPress: noop,
     isNodeExpanded: noop,
@@ -108,6 +110,7 @@ class TreeView extends React.Component {
           }}
         >
           <TouchableOpacity
+            activeOpacity={this.props.activeOpacityNode}
             disabled={this.props.shouldDisableTouchOnLeaf({ node, level })}
             onPress={() => this.handleNodePressed({ node, level })}
             onLongPress={() => this.props.onNodeLongPress({ node, level })}
