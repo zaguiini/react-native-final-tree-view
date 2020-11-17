@@ -179,6 +179,10 @@ Optional. The `id` key to refer to. Defaults to `id`
 
 Optional. The `children` key to look for. Defaults to `children`
 
+### `activeOpacityNode`
+
+Optional. The opacity of the wrapped node. Defaults `0.2`
+
 ### `initialExpanded`
 
 If nodes should start expanded. Defaults to `false`
