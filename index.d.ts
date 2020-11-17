@@ -16,6 +16,7 @@ interface Props<DataType> {
   initialExpanded: boolean
   getCollapsedNodeHeight: (args: NodeAction<DataType>) => number
   idKey: string
+  activeOpacityNode: number
   childrenKey: string
   onNodePress: (
     args: NodeAction<DataType>
