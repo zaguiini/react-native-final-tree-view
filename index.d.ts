@@ -1,4 +1,5 @@
 import React from 'react'
+import {ViewStyle} from 'react-native'
 
 interface NodeAction<DataType> {
   node: DataType
@@ -14,7 +15,7 @@ interface Props<DataType> {
   data: DataType[]
   renderNode: React.ElementType<RenderNodeProps<DataType>>
   initialExpanded: boolean
-  getCollapsedNodeHeight?: (args: NodeAction<DataType>) => number
+  getCollapsedNodeHeight?: (args: NodeAction<DataType>) => ViewStyle['height']
   idKey?: string
   activeOpacityNode?: number
   childrenKey?: string
