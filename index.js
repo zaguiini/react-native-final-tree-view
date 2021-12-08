@@ -10,26 +10,24 @@ class TreeView extends React.Component {
     data: PropTypes.array.isRequired,
     renderNode: PropTypes.func.isRequired,
     initialExpanded: PropTypes.bool,
-    getCollapsedNodeHeight: PropTypes.func,
     idKey: PropTypes.string,
     activeOpacityNode: PropTypes.number,
     childrenKey: PropTypes.string,
     onNodePress: PropTypes.func,
     onNodeLongPress: PropTypes.func,
     isNodeExpanded: PropTypes.func,
-    shouldDisableTouchOnLeaf: PropTypes.func
+    shouldDisableTouchOnLeaf: PropTypes.func,
   }
 
   static defaultProps = {
     initialExpanded: false,
-    getCollapsedNodeHeight: () => 20,
     idKey: 'id',
     childrenKey: 'children',
-    activeOpacityNode: .2,
+    activeOpacityNode: 0.2,
     onNodePress: noop,
     onNodeLongPress: noop,
     isNodeExpanded: noop,
-    shouldDisableTouchOnLeaf: () => false
+    shouldDisableTouchOnLeaf: () => false,
   }
 
   constructor(props) {
@@ -63,11 +61,13 @@ class TreeView extends React.Component {
     }
   }
 
-  updateNodeKeyById = (id, expanded) => ({ expandedNodeKeys }) => ({
-    expandedNodeKeys: Object.assign({}, expandedNodeKeys, {
-      [id]: expanded,
-    }),
-  })
+  updateNodeKeyById =
+    (id, expanded) =>
+    ({ expandedNodeKeys }) => ({
+      expandedNodeKeys: Object.assign({}, expandedNodeKeys, {
+        [id]: expanded,
+      }),
+    })
 
   collapseNode = (id) => this.setState(this.updateNodeKeyById(id, false))
 
@@ -96,19 +96,7 @@ class TreeView extends React.Component {
       const shouldRenderLevel = hasChildrenNodes && isExpanded
 
       return (
-        <View
-          key={node[this.props.idKey]}
-          style={{
-            height: isExpanded
-              ? 'auto'
-              : this.props.getCollapsedNodeHeight({
-                  [this.props.idKey]: node[this.props.idKey],
-                  level,
-                }),
-            zIndex: 1,
-            overflow: 'hidden',
-          }}
-        >
+        <View key={node[this.props.idKey]}>
           <TouchableOpacity
             activeOpacity={this.props.activeOpacityNode}
             disabled={this.props.shouldDisableTouchOnLeaf({ node, level })}
