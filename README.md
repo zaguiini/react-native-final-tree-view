@@ -161,16 +161,6 @@ Optional. Used for custom handling of expanded nodes. Signature:
 isNodeExpanded(id)
 ```
 
-### `getCollapsedNodeHeight`
-
-Optional. The collapsed item height for level. Defaults to `20`. Signature:
-
-```js
-getCollapsedNodeHeight({ [idKey], level })
-```
-
-The `[idKey]` part is whatever you chose to be the id. Defaults to `id`
-
 ### `idKey`
 
 Optional. The `id` key to refer to. Defaults to `id`
